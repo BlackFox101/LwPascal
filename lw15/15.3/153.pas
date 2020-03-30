@@ -1,19 +1,19 @@
 PROGRAM TestRemove(INPUT, OUTPUT);
-  {Читает строку из входа, пропускает ее через RemoveExtraBlanks}
+{Р§РёС‚Р°РµС‚ СЃС‚СЂРѕРєСѓ РёР· РІС…РѕРґР°, РїСЂРѕРїСѓСЃРєР°РµС‚ РµРµ С‡РµСЂРµР· RemoveExtraBlanks}
 USES Queue;
 VAR
   Ch: CHAR;
   
 PROCEDURE RemoveExtraBlanks;
-{Удаляет лишниe пробелы между словами на одной строке}
+{РЈРґР°Р»СЏРµС‚ Р»РёС€РЅРёe РїСЂРѕР±РµР»С‹ РјРµР¶РґСѓ СЃР»РѕРІР°РјРё РЅР° РѕРґРЅРѕР№ СЃС‚СЂРѕРєРµ}
 VAR
   Ch, Blank, LineEnd: CHAR;
 BEGIN {RemoveExtraBlanks}
   Blank := ' ';
   LineEnd := '$';
-  AddQ(LineEnd); {помечаем конец текста в очереди}
+  AddQ(LineEnd); {РїРѕРјРµС‡Р°РµРј РєРѕРЅРµС† С‚РµРєСЃС‚Р° РІ РѕС‡РµСЂРµРґРё}
   HeadQ(Ch);
-  {удаляем пробелы}
+  {РЈРґР°Р»СЏРµРј РїСЂРѕР±РµР»С‹}
   WHILE Ch = Blank 
   DO
     BEGIN
@@ -23,7 +23,7 @@ BEGIN {RemoveExtraBlanks}
   WHILE Ch <> LineEnd
   DO
     BEGIN
-      {читаем слово}
+      {С‡РёС‚Р°РµРј СЃР»РѕРІРѕ}
       WHILE (Ch <> Blank) AND (Ch <> LineEnd)
       DO
        BEGIN
@@ -31,24 +31,24 @@ BEGIN {RemoveExtraBlanks}
          DelQ;
          HeadQ(Ch)
        END;
-      {удаляем пробелы}
+      {СѓРґР°Р»СЏРµРј РїСЂРѕР±РµР»С‹}
       WHILE Ch = Blank 
       DO
         BEGIN
           DelQ;
           HeadQ(Ch)
         END;
-      {Вставляем пробел между словами}
+      {Р’СЃС‚Р°РІР»СЏРµРј РїСЂРѕР±РµР» РјРµР¶РґСѓ СЃР»РѕРІР°РјРё}
       IF Ch <> LineEnd
        THEN
          AddQ(Blank)
     END;
-  DelQ {удаяем LineEnd из очереди}
+  DelQ {СѓРґР°СЏРµРј LineEnd РёР· РѕС‡РµСЂРµРґРё}
 END; {RemoveExtraBlanks}
  
 BEGIN {TestRemove}
   EmptyQ;
-  WRITE('Вход:');
+  WRITE('Р’С…РѕРґ:');
   WHILE NOT EOLN
   DO
     BEGIN
@@ -58,7 +58,7 @@ BEGIN {TestRemove}
     END;
   WRITELN;  
   RemoveExtraBlanks;  
-  WRITE('Выход:');
+  WRITE('Р’С‹С…РѕРґ:');
   HeadQ(Ch);
   WHILE Ch <> '#'
   DO
