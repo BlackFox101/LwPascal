@@ -7,7 +7,7 @@ IMPLEMENTATION
 VAR
   Ones, Tens, Hundreds: CHAR;                
   PROCEDURE Start;
-    {Сбрасывает счетчик в ноль}
+    {РЎР±СЂР°СЃС‹РІР°РµС‚ СЃС‡РµС‚С‡РёРє РІ РЅРѕР»СЊ}
     BEGIN{Start}
       Ones      := '0';
       Tens      := '0';
@@ -15,8 +15,8 @@ VAR
     END;{Start}
  
   PROCEDURE Bump;
-    {Увеличивает 3-цифровой счетчик определенный   Ones, Tens, Hundreds
-     на единицу ,если он находится в диапaзоне от 0 до 999 }
+    {РЈРІРµР»РёС‡РёРІР°РµС‚ 3-С†РёС„СЂРѕРІРѕР№ СЃС‡РµС‚С‡РёРє РѕРїСЂРµРґРµР»РµРЅРЅС‹Р№   Ones, Tens, Hundreds
+     РЅР° РµРґРёРЅРёС†Сѓ ,РµСЃР»Рё РѕРЅ РЅР°С…РѕРґРёС‚СЃСЏ РІ РґРёР°РїaР·РѕРЅРµ РѕС‚ 0 РґРѕ 999 }
     PROCEDURE NextDigit(VAR Digit: CHAR);
       BEGIN {NextDigit}
         IF Digit = '0' THEN Digit := '1' ELSE
@@ -51,7 +51,7 @@ VAR
         END
     END; {Bump}
     PROCEDURE Value(VAR V100, V10, V1: CHAR);
-      {Возвращает содержимое счетчика}
+      {Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃРѕРґРµСЂР¶РёРјРѕРµ СЃС‡РµС‚С‡РёРєР°}
       BEGIN {Value}
          V100  := Hundreds;
          V10   := Tens;
