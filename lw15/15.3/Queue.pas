@@ -1,9 +1,9 @@
 UNIT Queue;
 INTERFACE
-  PROCEDURE EmptyQ;               {Очистить очередь}
-  PROCEDURE AddQ(VAR Elt: CHAR);  {Поставить элемент в очередь}
-  PROCEDURE DelQ;                 {Убрать первый элемент из очереди}
-  PROCEDURE HeadQ(VAR Elt: CHAR); {Первый элемент в очереди}
+  PROCEDURE EmptyQ;               {РћС‡РёСЃС‚РёС‚СЊ РѕС‡РµСЂРµРґСЊ}
+  PROCEDURE AddQ(VAR Elt: CHAR);  {РџРѕСЃС‚Р°РІРёС‚СЊ СЌР»РµРјРµРЅС‚ РІ РѕС‡РµСЂРµРґСЊ}
+  PROCEDURE DelQ;                 {РЈР±СЂР°С‚СЊ РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РёР· РѕС‡РµСЂРµРґРё}
+  PROCEDURE HeadQ(VAR Elt: CHAR); {РџРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РІ РѕС‡РµСЂРµРґРё}
   PROCEDURE WriteQ;
  
 IMPLEMENTATION
@@ -11,9 +11,9 @@ VAR
   Q, TEMP: TEXT;
  
 PROCEDURE CopyOpen(VAR F1, F2 :TEXT);
- {копириует строку из F1 в F2 без RESET или REWRITE;
-  таким образом F1 должен быть готов для чтения,а F2 для записи,
-  но прошлые строки у этих файлов могут быть не пусты }
+ {РєРѕРїРёСЂРёСѓРµС‚ СЃС‚СЂРѕРєСѓ РёР· F1 РІ F2 Р±РµР· RESET РёР»Рё REWRITE;
+  С‚Р°РєРёРј РѕР±СЂР°Р·РѕРј F1 РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РіРѕС‚РѕРІ РґР»СЏ С‡С‚РµРЅРёСЏ,Р° F2 РґР»СЏ Р·Р°РїРёСЃРё,
+  РЅРѕ РїСЂРѕС€Р»С‹Рµ СЃС‚СЂРѕРєРё Сѓ СЌС‚РёС… С„Р°Р№Р»РѕРІ РјРѕРіСѓС‚ Р±С‹С‚СЊ РЅРµ РїСѓСЃС‚С‹ }
 VAR
   Ch: CHAR;
 BEGIN {CopyOpen}
@@ -25,7 +25,7 @@ BEGIN {CopyOpen}
     END
 END;{CopyOpen}
  
-PROCEDURE EmptyQ; {Очистить очередь}
+PROCEDURE EmptyQ; {РћС‡РёСЃС‚РёС‚СЊ РѕС‡РµСЂРµРґСЊ}
 {Q := <,/,R>}
 BEGIN {EmptyQ}
   REWRITE(Q);
@@ -33,8 +33,8 @@ BEGIN {EmptyQ}
   RESET(Q)
 END; {EmptyQ}
  
-PROCEDURE AddQ(VAR Elt: CHAR); {Поставить элемент в очередь}
-  {Q = <,x/,R>,где x строка И Elt = a -->
+PROCEDURE AddQ(VAR Elt: CHAR); {РџРѕСЃС‚Р°РІРёС‚СЊ СЌР»РµРјРµРЅС‚ РІ РѕС‡РµСЂРµРґСЊ}
+  {Q = <,x/,R>,РіРґРµ x СЃС‚СЂРѕРєР° Р Elt = a -->
    Q = <,xa/,R> }
 VAR
   Temp: TEXT;
@@ -49,23 +49,23 @@ BEGIN {AddQ}
   RESET(Q)
 END;{AddQ}
  
-PROCEDURE DelQ;{Убрать первый элемент из очереди}
+PROCEDURE DelQ;{РЈР±СЂР°С‚СЊ РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РёР· РѕС‡РµСЂРµРґРё}
   {(Q = <,/,R> -->)|
-   (Q = <,ax/,R>,где a символ и x строка  -->
+   (Q = <,ax/,R>,РіРґРµ a СЃРёРјРІРѕР» Рё x СЃС‚СЂРѕРєР°  -->
      Q:= <,x/,R> }
 VAR
   Ch: CHAR;
   Temp: TEXT;
 BEGIN {DelQ}
-  {удаляем первый элемент из Q}
+  {СѓРґР°Р»СЏРµРј РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РёР· Q}
   READ(Q, Ch);
   IF NOT EOF(Q)
-  THEN {не пустой}
+  THEN {РЅРµ РїСѓСЃС‚РѕР№}
     BEGIN
       REWRITE(Temp);
       CopyOpen(Q, Temp);
       WRITELN(Temp);
-      {копируем Temp в Q}
+      {РєРѕРїРёСЂСѓРµРј Temp РІ Q}
       RESET(Temp);
       REWRITE(Q);
       CopyOpen(Temp, Q);
@@ -74,9 +74,9 @@ BEGIN {DelQ}
   RESET(Q)
 END;{DelQ}
  
-PROCEDURE HeadQ(VAR Elt: CHAR);{Первый элемент в очереди}
+PROCEDURE HeadQ(VAR Elt: CHAR);{РџРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РІ РѕС‡РµСЂРµРґРё}
   {(Q = <,/,R> --> Elt := '#')|
-   (Q = <,ax/,R>,где a символ и x строка  -->
+   (Q = <,ax/,R>,РіРґРµ a СЃРёРјРІРѕР» Рё x СЃС‚СЂРѕРєР°  -->
      Elt := 'a' }
 BEGIN {HeadQ}
   IF NOT EOLN(Q)
@@ -88,7 +88,7 @@ BEGIN {HeadQ}
 END;{HeadQ}
  
 PROCEDURE WriteQ;
-  { (Q = <,x/,R> и OUTPUT =<y,,W>,где y и x строка  -->
+  { (Q = <,x/,R> Рё OUTPUT =<y,,W>,РіРґРµ y Рё x СЃС‚СЂРѕРєР°  -->
      OUTPUT := <y&x/,,W> }
 BEGIN {WriteQ}
   CopyOpen(Q, OUTPUT);
