@@ -1,18 +1,17 @@
 PROGRAM Stat(INPUT, OUTPUT);
-
 VAR
   Min, Max, Sum, Average, Empty, CountDigit: INTEGER;
   Overflow: BOOLEAN;
 
 PROCEDURE ReadNumber(VAR InF: TEXT; VAR N: INTEGER);
-{Преобразует строку цифр из файла до первого нецифрового символа, 
- в соответствующее целое число N}
+PROGRAM Stat(INPUT, OUTPUT);
+
 VAR
   Ch: CHAR;
-  EmptyDigit: INTEGER; // A нужен для Val 
+  EmptyDigit: INTEGER;
 BEGIN{ReadNumber}
-  N := 0; // Обнуляем N
-  Ch := '0'; // Инициализация Ch для цикла
+  N := 0; // РћР±РЅСѓР»СЏРµРј N
+  Ch := '0'; // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ Ch РґР»СЏ С†РёРєР»Р°
   WHILE NOT EOLN(InF) AND (N <> -1) AND (('0' <= Ch) AND (Ch <= '9'))
   DO
     BEGIN
@@ -58,7 +57,7 @@ BEGIN{Stat}
     BEGIN
       ReadNumber(INPUT, Empty);
       CountDigit := CountDigit + 1;
-      IF NOT Overflow // Находим сумму и кол-во чисел
+      IF NOT Overflow // РќР°С…РѕРґРёРј СЃСѓРјРјСѓ Рё РєРѕР»-РІРѕ С‡РёСЃРµР»
       THEN
         IF (32767 - Empty) > Sum
         THEN
@@ -77,10 +76,10 @@ BEGIN{Stat}
   WRITELN('Max=', Max, '.00');
   IF Overflow
   THEN
-    WRITELN('Среднее арифметическое не вычеслено так как произошло переполнение!')
+    WRITELN('РЎСЂРµРґРЅРµРµ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРѕРµ РЅРµ РІС‹С‡РµСЃР»РµРЅРѕ С‚Р°Рє РєР°Рє РїСЂРѕРёР·РѕС€Р»Рѕ РїРµСЂРµРїРѕР»РЅРµРЅРёРµ!')
   ELSE
     BEGIN
-      Average := Sum DIV CountDigit;  // Находим среднее арифметическое
+      Average := Sum DIV CountDigit;  // РќР°С…РѕРґРёРј СЃСЂРµРґРЅРµРµ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРѕРµ
       WRITE('Average=', Average);
       Average := Sum MOD CountDigit;
       IF Average > 9
