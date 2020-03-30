@@ -25,7 +25,7 @@ BEGIN {AverageScore}
           WHILE (NextScore > 100) OR (NextScore < 0)
           DO
             BEGIN
-              WRITELN('Íå âåðíûé áàëë! Ââåäèòå áàëë îò 0 äî 100');
+              WRITELN('ÐÐµ Ð²ÐµÑ€Ð½Ñ‹Ð¹ Ð±Ð°Ð»Ð»! Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð±Ð°Ð»Ð» Ð¾Ñ‚ 0 Ð´Ð¾ 100');
               READ(NextScore)
             END;
           TotalScore := TotalScore + NextScore;
@@ -34,7 +34,7 @@ BEGIN {AverageScore}
       READLN;
       TotalScore := TotalScore * 10;
       Ave := TotalScore DIV NumberOfScores;
-      // Åñëè â îñòàòêå áîëüøå èëè ðàâíî 5 îêðóãëÿåì â áîëüøóþ ñòîðîíó
+      // Ð•ÑÐ»Ð¸ Ð² Ð¾ÑÑ‚Ð°Ñ‚ÐºÐµ Ð±Ð¾Ð»ÑŒÑˆÐµ Ð¸Ð»Ð¸ Ñ€Ð°Ð²Ð½Ð¾ 5 Ð¾ÐºÑ€ÑƒÐ³Ð»ÑÐµÐ¼ Ð² Ð±Ð¾Ð»ÑŒÑˆÑƒÑŽ ÑÑ‚Ð¾Ñ€Ð¾Ð½Ñƒ
       IF Ave MOD 10 >= 5
       THEN
         WRITE(Ave DIV 10 + 1)
