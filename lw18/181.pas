@@ -32,10 +32,10 @@ BEGIN {AverageScore}
               WRITELN('Не верный балл! Введите балл от 0 до 100');
               IF NOT EOLN
               THEN
-                READ(NextScore);
+                READ(NextScore)
             END;
           TotalScore := TotalScore + NextScore;
-          WhichScore := WhichScore + 1;
+          WhichScore := WhichScore + 1
         END;
       READLN;
       TotalScore := TotalScore * 10;
@@ -48,7 +48,7 @@ BEGIN {AverageScore}
         WRITE(Ave DIV 10);
       ClassTotal := ClassTotal + TotalScore;
       Student := Student + 1;
-      WRITELN;
+      WRITELN
     END;
   WRITELN;
   WRITELN('Class average:');
