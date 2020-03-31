@@ -1,38 +1,38 @@
 PROGRAM Split(INPUT, OUTPUT);
-  {Копирует INPUT в OUTPUT,сначала нечетные,а затем четные
-   элементы}
+{РљРѕРїРёСЂСѓРµС‚ INPUT РІ OUTPUT,СЃРЅР°С‡Р°Р»Р° РЅРµС‡РµС‚РЅС‹Рµ,Р° Р·Р°С‚РµРј С‡РµС‚РЅС‹Рµ
+ СЌР»РµРјРµРЅС‚С‹}
 VAR
   Ch, Next: CHAR;
   Odds, Evens: TEXT;  
 PROCEDURE CopyOut(VAR F1: TEXT; VAR Ch: CHAR);
 BEGIN{CopyOut}
-  { Копируем F1 в OUTPUT }
+  { РљРѕРїРёСЂСѓРµРј F1 РІ OUTPUT }
   RESET(F1);
   WHILE NOT EOF(F1)
   DO
     BEGIN
-	  WHILE NOT EOLN(F1)
+      WHILE NOT EOLN(F1)
       DO
         BEGIN
           READ(F1, Ch);
           WRITE(OUTPUT, Ch)
         END;
-	  READLN(F1)
-	END
+      READLN(F1)
+    END
 END;{CopyOut}
  
 BEGIN{Split}
-  {Разделяет INPUT в Odds и Evens}
+  {Р Р°Р·РґРµР»СЏРµС‚ INPUT РІ Odds Рё Evens}
   BEGIN
-    REWRITE(Odds);{нечетные}
-    REWRITE(Evens);{четные}
+    REWRITE(Odds);{РЅРµС‡РµС‚РЅС‹Рµ}
+    REWRITE(Evens);{С‡РµС‚РЅС‹Рµ}
     Next := 'O';
     WHILE NOT EOF
     DO
       BEGIN
         WHILE NOT EOLN
         DO
-          {Прочитать Ch, записать в файл, выбранный через Next, переключить Next}
+          {РџСЂРѕС‡РёС‚Р°С‚СЊ Ch, Р·Р°РїРёСЃР°С‚СЊ РІ С„Р°Р№Р», РІС‹Р±СЂР°РЅРЅС‹Р№ С‡РµСЂРµР· Next, РїРµСЂРµРєР»СЋС‡РёС‚СЊ Next}
           BEGIN
             READ(INPUT, Ch);		  
             IF Next = 'O'

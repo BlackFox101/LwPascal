@@ -1,36 +1,38 @@
 PROGRAM ProgramReadDigit(INPUT, OUTPUT);
 VAR
-  I, Sum: INTEGER;
+  EmptyDigit, Sum: INTEGER;
   
-PROCEDURE ReadDigit(VAR InF: TEXT; VAR D: INTEGER);
-{Считывает текущий символ из файла, если он - цифра, возвращает его 
- преобразуя в значение типа INTEGER. Если считанный символ не цифра
- возвращает -1}
+PROCEDURE ReadDigit(VAR InF: TEXT; VAR Digit: INTEGER);
+{РЎС‡РёС‚С‹РІР°РµС‚ С‚РµРєСѓС‰РёР№ СЃРёРјРІРѕР» РёР· С„Р°Р№Р»Р°, РµСЃР»Рё РѕРЅ - С†РёС„СЂР°, РІРѕР·РІСЂР°С‰Р°РµС‚ РµРіРѕ 
+ РїСЂРµРѕР±СЂР°Р·СѓВ¤ РІ Р·РЅР°С‡РµРЅРёРµ С‚РёРїР° INTEGER. ?СЃР»Рё СЃС‡РёС‚Р°РЅРЅС‹Р№ СЃРёРјРІРѕР» РЅРµ С†РёС„СЂР°
+ РІРѕР·РІСЂР°С‰Р°РµС‚ -1}
 VAR
   Ch: CHAR;
 BEGIN{ReadDigit}
   READ(InF, Ch);
-  D := -1;
-  IF (Ch = '0') THEN D := 0 ELSE
-  IF (Ch = '1') THEN D := 1 ELSE
-  IF (Ch = '2') THEN D := 2 ELSE
-  IF (Ch = '3') THEN D := 3 ELSE
-  IF (Ch = '4') THEN D := 4 ELSE
-  IF (Ch = '5') THEN D := 5 ELSE
-  IF (Ch = '6') THEN D := 6 ELSE
-  IF (Ch = '7') THEN D := 7 ELSE
-  IF (Ch = '8') THEN D := 8 ELSE
-  IF (Ch = '9') THEN D := 9
+  Digit := -1;
+  IF (Ch = '0') THEN Digit := 0 ELSE
+  IF (Ch = '1') THEN Digit := 1 ELSE
+  IF (Ch = '2') THEN Digit := 2 ELSE
+  IF (Ch = '3') THEN Digit := 3 ELSE
+  IF (Ch = '4') THEN Digit := 4 ELSE
+  IF (Ch = '5') THEN Digit := 5 ELSE
+  IF (Ch = '6') THEN Digit := 6 ELSE
+  IF (Ch = '7') THEN Digit := 7 ELSE
+  IF (Ch = '8') THEN Digit := 8 ELSE
+  IF (Ch = '9') THEN Digit := 9
 END;{ReadDigit}
 
 BEGIN{ProgramReadDigit}
-  WHILE (NOT EOLN) AND (I <> -1)
+  Sum := 0;
+  EmptyDigit := 0;
+  WHILE (NOT EOLN) AND (EmptyDigit <> -1)
   DO
     BEGIN
-      ReadDigit(INPUT, I);
-      IF I <> -1
+      ReadDigit(INPUT, EmptyDigit);
+      IF EmptyDigit <> -1
       THEN
-        Sum := Sum + I
+        Sum := Sum + EmptyDigit
     END;
-  WRITELN('Сумма:', Sum)
+  WRITELN('РЎСѓРјРјР°:', Sum)
 END.{ProgramReadDigit}

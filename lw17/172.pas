@@ -2,43 +2,53 @@ PROGRAM ProgramReadNumber(INPUT, OUTPUT);
 VAR
   I: INTEGER;
 
-PROCEDURE ReadNumber(VAR InF: TEXT; VAR N: INTEGER);
-{Преобразует строку цифр из файла до первого нецифрового символа, 
- в соответствующее целое число N}
+PROCEDURE ReadDigit(VAR InF: TEXT; VAR Digit: INTEGER);
+{РЎС‡РёС‚С‹РІР°РµС‚ С‚РµРєСѓС‰РёР№ СЃРёРјРІРѕР» РёР· С„Р°Р№Р»Р°, РµСЃР»Рё РѕРЅ - С†РёС„СЂР°, РІРѕР·РІСЂР°С‰Р°РµС‚ РµРіРѕ 
+ РїСЂРµРѕР±СЂР°Р·СѓВ¤ РІ Р·РЅР°С‡РµРЅРёРµ С‚РёРїР° INTEGER. ?СЃР»Рё СЃС‡РёС‚Р°РЅРЅС‹Р№ СЃРёРјРІРѕР» РЅРµ С†РёС„СЂР°
+ РІРѕР·РІСЂР°С‰Р°РµС‚ -1}
 VAR
   Ch: CHAR;
-  EmptyDigit: INTEGER; // A нужен для Val 
+BEGIN{ReadDigit}
+  READ(InF, Ch);
+  Digit := -1;
+  IF (Ch = '0') THEN Digit := 0 ELSE
+  IF (Ch = '1') THEN Digit := 1 ELSE
+  IF (Ch = '2') THEN Digit := 2 ELSE
+  IF (Ch = '3') THEN Digit := 3 ELSE
+  IF (Ch = '4') THEN Digit := 4 ELSE
+  IF (Ch = '5') THEN Digit := 5 ELSE
+  IF (Ch = '6') THEN Digit := 6 ELSE
+  IF (Ch = '7') THEN Digit := 7 ELSE
+  IF (Ch = '8') THEN Digit := 8 ELSE
+  IF (Ch = '9') THEN Digit := 9
+END;{ReadDigit}
+
+PROCEDURE ReadNumber(VAR InF: TEXT; VAR N: INTEGER);
+{РџСЂРµРѕР±СЂР°Р·СѓРµС‚ СЃС‚СЂРѕРєСѓ С†РёС„СЂ РёР· С„Р°Р№Р»Р° РґРѕ РїРµСЂРІРѕРіРѕ РЅРµС†РёС„СЂРѕРІРѕРіРѕ СЃРёРјРІРѕР»Р°, 
+ РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµРµ С†РµР»РѕРµ С‡РёСЃР»Рѕ N}
+CONST
+  MAXINT = 32767;
+VAR
+  EmptyDigit: INTEGER; 
 BEGIN{ReadNumber}
-  N := 0; // Обнуляем N
-  Ch := '0'; // Инициализация Ch для цикла
-  WHILE NOT EOLN(InF) AND (N <> -1) AND (('0' <= Ch) AND (Ch <= '9'))
+  N := 0; // РћР±РЅСѓР»СЏРµРј N
+  WHILE NOT EOLN(InF) AND (EmptyDigit <> -1) AND (N <> -1)
   DO
     BEGIN
-      READ(InF, Ch);
-      IF ('0' <= Ch) AND (Ch <= '9')
+      ReadDigit(InF, EmptyDigit);
+      // Р•СЃР»Рё РІСЃС‚СЂРµС‚РёР»РѕСЃСЊ С‡РёСЃС‚Рѕ С‚Рѕ СЃС‡РёС‚Р°РµРј
+      IF EmptyDigit <> -1 
       THEN
-        BEGIN
-          IF (Ch = '0') THEN EmptyDigit := 0 ELSE
-          IF (Ch = '1') THEN EmptyDigit := 1 ELSE
-          IF (Ch = '2') THEN EmptyDigit := 2 ELSE
-          IF (Ch = '3') THEN EmptyDigit := 3 ELSE
-          IF (Ch = '4') THEN EmptyDigit := 4 ELSE
-          IF (Ch = '5') THEN EmptyDigit := 5 ELSE
-          IF (Ch = '6') THEN EmptyDigit := 6 ELSE
-          IF (Ch = '7') THEN EmptyDigit := 7 ELSE
-          IF (Ch = '8') THEN EmptyDigit := 8 ELSE
-          IF (Ch = '9') THEN EmptyDigit := 9;
-          IF (N < 3276)
+        IF (N < MAXINT DIV 10)
+        THEN
+          N := (N * 10) + EmptyDigit
+        ELSE
+          IF (EmptyDigit <= MAXINT MOD 10) AND (N = MAXINT DIV 10)
           THEN
             N := (N * 10) + EmptyDigit
           ELSE
-            IF (EmptyDigit <= 7) AND (N = 3276)
-            THEN
-              N := (N * 10) + EmptyDigit
-            ELSE
-              N := -1
-        END
-    END
+            N := -1
+    END; 
 END;{ReadNumber}
 
 BEGIN{ProgramReadNumber }

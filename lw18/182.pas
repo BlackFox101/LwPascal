@@ -2,6 +2,8 @@ PROGRAM AverageScore(INPUT, OUTPUT);
 CONST
   NumberOfScores = 4;
   ClassSize = 4;
+  ScoreMin = 0;
+  ScoreMax = 100;
   Letter = ['a' .. 'z', 'A' .. 'Z'];
 TYPE
   Score = 0 .. 100;
@@ -52,35 +54,39 @@ BEGIN {AverageScore}
       WhichScore := 1;
       REWRITE(Name);
       CopyName(INPUT, Name);
-      WHILE WhichScore <= 4
+      WHILE WhichScore <= NumberOfScores
       DO
         BEGIN
-          READ(NextScore);
-          WHILE (NextScore > 100) OR (NextScore < 0)
+          IF NOT EOLN
+          THEN
+            READ(NextScore);
+          WHILE (NextScore > ScoreMax) OR (NextScore < ScoreMin)
           DO
             BEGIN
-              WRITELN('Íå âåðíûé áàëë! Ââåäèòå áàëë îò 0 äî 100');
-              READ(NextScore)
+              WRITELN('ÐÐµ Ð²ÐµÑ€Ð½Ñ‹Ð¹ Ð±Ð°Ð»Ð»! Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð±Ð°Ð»Ð» Ð¾Ñ‚ 0 Ð´Ð¾ 100');
+              IF NOT EOLN
+              THEN
+                READ(NextScore)
             END;
           TotalScore := TotalScore + NextScore;
-          WhichScore := WhichScore + 1;
+          WhichScore := WhichScore + 1
         END;
       READLN;
       TotalScore := TotalScore * 10;
       Ave := TotalScore DIV NumberOfScores;
       RESET(Name);
       WriteName(Name, OUTPUT);
-      // Åñëè â îñòàòêå áîëüøå èëè ðàâíî 5 îêðóãëÿåì â áîëüøóþ ñòîðîíó
+      // Ð•ÑÐ»Ð¸ Ð² Ð¾ÑÑ‚Ð°Ñ‚ÐºÐµ Ð±Ð¾Ð»ÑŒÑˆÐµ Ð¸Ð»Ð¸ Ñ€Ð°Ð²Ð½Ð¾ 5 Ð¾ÐºÑ€ÑƒÐ³Ð»ÑÐµÐ¼ Ð² Ð±Ð¾Ð»ÑŒÑˆÑƒÑŽ ÑÑ‚Ð¾Ñ€Ð¾Ð½Ñƒ
       IF Ave MOD 10 >= 5
       THEN
         WRITE(Ave DIV 10 + 1)
       ELSE
         WRITE(Ave DIV 10);
       ClassTotal := ClassTotal + TotalScore;
-      WRITELN;
+      WRITELN
     END;
   WRITELN;
-  WRITELN ('Class average:');
+  WRITELN('Class average:');
   ClassTotal := ClassTotal DIV (ClassSize * NumberOfScores);
   WRITELN(ClassTotal DIV 10, '.', ClassTotal MOD 10:1)
 END.  {AverageScore}

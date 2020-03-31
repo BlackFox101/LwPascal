@@ -1,5 +1,5 @@
 PROGRAM TestRemove(INPUT, OUTPUT);
-  {Читает строку из входа, пропускает ее через RemoveExtraBlanks}
+{Читает строку из входа, пропускает ее через RemoveExtraBlanks}
 USES Queue;
 VAR
   Ch: CHAR;

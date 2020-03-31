@@ -4,7 +4,7 @@ VAR
   W1, W2, W3: CHAR;
 BEGIN
   Start;
-  WRITE('Ввод:');
+  WRITE('Р’РІРѕРґ:');
   IF NOT EOLN
   THEN
     READ(W1); 
@@ -23,5 +23,5 @@ BEGIN
     END;
   WRITE;
   Value(W1, W2, W3);
-  WRITELN('Количество реверсов:', W1, W2, W3)
+  WRITELN('РљРѕР»РёС‡РµСЃС‚РІРѕ СЂРµРІРµСЂСЃРѕРІ:', W1, W2, W3)
 END.

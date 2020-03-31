@@ -1,99 +1,99 @@
 UNIT Queue;
 INTERFACE
-  PROCEDURE EmptyQ;               {Очистить очередь}
-  PROCEDURE AddQ(VAR Elt: CHAR);  {Поставить элемент в очередь}
-  PROCEDURE DelQ;                 {Убрать первый элемент из очереди}
-  PROCEDURE HeadQ(VAR Elt: CHAR); {Первый элемент в очереди}
+  PROCEDURE EmptyQ;               {РћС‡РёСЃС‚РёС‚СЊ РѕС‡РµСЂРµРґСЊ}
+  PROCEDURE AddQ(VAR Element: CHAR);  {РџРѕСЃС‚Р°РІРёС‚СЊ СЌР»РµРјРµРЅС‚ РІ РѕС‡РµСЂРµРґСЊ}
+  PROCEDURE DelQ;                 {РЈР±СЂР°С‚СЊ РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РёР· РѕС‡РµСЂРµРґРё}
+  PROCEDURE HeadQ(VAR Element: CHAR); {РџРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РІ РѕС‡РµСЂРµРґРё}
   PROCEDURE WriteQ;
  
 IMPLEMENTATION
 VAR
-  Q, TEMP: TEXT;
+  Queue: TEXT;
  
-PROCEDURE CopyOpen(VAR F1, F2 :TEXT);
- {копириует строку из F1 в F2 без RESET или REWRITE;
-  таким образом F1 должен быть готов для чтения,а F2 для записи,
-  но прошлые строки у этих файлов могут быть не пусты }
+PROCEDURE Copy(VAR FIn, FOut: TEXT);
+ {РєРѕРїРёСЂРёСѓРµС‚ СЃС‚СЂРѕРєСѓ РёР· F1 РІ F2 Р±РµР· RESET РёР»Рё REWRITE;
+  С‚Р°РєРёРј РѕР±СЂР°Р·РѕРј F1 РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РіРѕС‚РѕРІ РґР»СЏ С‡С‚РµРЅРёСЏ,Р° F2 РґР»СЏ Р·Р°РїРёСЃРё,
+  РЅРѕ РїСЂРѕС€Р»С‹Рµ СЃС‚СЂРѕРєРё Сѓ СЌС‚РёС… С„Р°Р№Р»РѕРІ РјРѕРіСѓС‚ Р±С‹С‚СЊ РЅРµ РїСѓСЃС‚С‹ }
 VAR
   Ch: CHAR;
-BEGIN {CopyOpen}
-  WHILE NOT EOLN(F1)
+BEGIN {Copy}
+  WHILE NOT EOLN(FIn)
   DO
     BEGIN
-      READ(F1, Ch);
-      WRITE(F2, Ch)
+      READ(FIn, Ch);
+      WRITE(FOut, Ch)
     END
-END;{CopyOpen}
+END;{Copy}
  
-PROCEDURE EmptyQ; {Очистить очередь}
-{Q := <,/,R>}
+PROCEDURE EmptyQ; {РћС‡РёСЃС‚РёС‚СЊ РѕС‡РµСЂРµРґСЊ}
+{Queue := <,/,R>}
 BEGIN {EmptyQ}
-  REWRITE(Q);
-  WRITELN(Q);
-  RESET(Q)
+  REWRITE(Queue);
+  WRITELN(Queue);
+  RESET(Queue)
 END; {EmptyQ}
  
-PROCEDURE AddQ(VAR Elt: CHAR); {Поставить элемент в очередь}
-  {Q = <,x/,R>,где x строка И Elt = a -->
-   Q = <,xa/,R> }
+PROCEDURE AddQ(VAR Element: CHAR); {РџРѕСЃС‚Р°РІРёС‚СЊ СЌР»РµРјРµРЅС‚ РІ РѕС‡РµСЂРµРґСЊ}
+  {Queue = <,x/,R>,РіРґРµ x СЃС‚СЂРѕРєР° Р Element = a -->
+   Queue = <,xa/,R> }
 VAR
   Temp: TEXT;
 BEGIN {AddQ}
   REWRITE(Temp);
-  CopyOpen(Q, Temp);
-  WRITELN(Temp, Elt);
+  Copy(Queue, Temp);
+  WRITELN(Temp, Element);
   RESET(Temp);
-  REWRITE(Q);
-  CopyOpen(Temp, Q);
-  WRITELN(Q);
-  RESET(Q)
+  REWRITE(Queue);
+  Copy(Temp, Queue);
+  WRITELN(Queue);
+  RESET(Queue)
 END;{AddQ}
  
-PROCEDURE DelQ;{Убрать первый элемент из очереди}
-  {(Q = <,/,R> -->)|
-   (Q = <,ax/,R>,где a символ и x строка  -->
-     Q:= <,x/,R> }
+PROCEDURE DelQ;{РЈР±СЂР°С‚СЊ РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РёР· РѕС‡РµСЂРµРґРё}
+  {(Queue = <,/,R> -->)|
+   (Queue = <,ax/,R>,РіРґРµ a СЃРёРјРІРѕР» Рё x СЃС‚СЂРѕРєР°  -->
+     Queue:= <,x/,R> }
 VAR
   Ch: CHAR;
   Temp: TEXT;
 BEGIN {DelQ}
-  {удаляем первый элемент из Q}
-  READ(Q, Ch);
-  IF NOT EOF(Q)
-  THEN {не пустой}
+  {СѓРґР°Р»СЏРµРј РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РёР· Queue}
+  READ(Queue, Ch);
+  IF NOT EOF(Queue)
+  THEN {РЅРµ РїСѓСЃС‚РѕР№}
     BEGIN
       REWRITE(Temp);
-      CopyOpen(Q, Temp);
+      Copy(Queue, Temp);
       WRITELN(Temp);
-      {копируем Temp в Q}
+      {РєРѕРїРёСЂСѓРµРј Temp РІ Queue}
       RESET(Temp);
-      REWRITE(Q);
-      CopyOpen(Temp, Q);
-      WRITELN(Q);
+      REWRITE(Queue);
+      Copy(Temp, Queue);
+      WRITELN(Queue)
     END;
-  RESET(Q)
+  RESET(Queue)
 END;{DelQ}
  
-PROCEDURE HeadQ(VAR Elt: CHAR);{Первый элемент в очереди}
-  {(Q = <,/,R> --> Elt := '#')|
-   (Q = <,ax/,R>,где a символ и x строка  -->
-     Elt := 'a' }
+PROCEDURE HeadQ(VAR Element: CHAR);{РџРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РІ РѕС‡РµСЂРµРґРё}
+  {(Queue = <,/,R> --> Element := '#')|
+   (Queue = <,ax/,R>,РіРґРµ a СЃРёРјРІРѕР» Рё x СЃС‚СЂРѕРєР°  -->
+     Element := 'a' }
 BEGIN {HeadQ}
-  IF NOT EOLN(Q)
+  IF NOT EOLN(Queue)
   THEN
-    READ(Q, Elt)
+    READ(Queue, Element)
   ELSE
-    Elt := '#';
-  RESET(Q)
+    Element := '#';
+  RESET(Queue)
 END;{HeadQ}
  
 PROCEDURE WriteQ;
-  { (Q = <,x/,R> и OUTPUT =<y,,W>,где y и x строка  -->
+  { (Queue = <,x/,R> Рё OUTPUT =<y,,W>,РіРґРµ y Рё x СЃС‚СЂРѕРєР°  -->
      OUTPUT := <y&x/,,W> }
 BEGIN {WriteQ}
-  CopyOpen(Q, OUTPUT);
+  Copy(Queue, OUTPUT);
   WRITELN(OUTPUT);
-  RESET(Q)
+  RESET(Queue)
 END;{WriteQ}
  
 BEGIN {Queue}
