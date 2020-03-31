@@ -2,6 +2,8 @@ PROGRAM AverageScore(INPUT, OUTPUT);
 CONST
   NumberOfScores = 4;
   ClassSize = 4;
+  ScoreMin = 0;
+  ScoreMax = 100;
   Letter = ['a' .. 'z', 'A' .. 'Z'];
 TYPE
   Score = 0 .. 100;
@@ -52,18 +54,22 @@ BEGIN {AverageScore}
       WhichScore := 1;
       REWRITE(Name);
       CopyName(INPUT, Name);
-      WHILE WhichScore <= 4
+      WHILE WhichScore <= NumberOfScores
       DO
         BEGIN
-          READ(NextScore);
-          WHILE (NextScore > 100) OR (NextScore < 0)
+          IF NOT EOLN
+          THEN
+            READ(NextScore);
+          WHILE (NextScore > ScoreMax) OR (NextScore < ScoreMin)
           DO
             BEGIN
               WRITELN('Не верный балл! Введите балл от 0 до 100');
-              READ(NextScore)
+              IF NOT EOLN
+              THEN
+                READ(NextScore)
             END;
           TotalScore := TotalScore + NextScore;
-          WhichScore := WhichScore + 1;
+          WhichScore := WhichScore + 1
         END;
       READLN;
       TotalScore := TotalScore * 10;
@@ -77,10 +83,10 @@ BEGIN {AverageScore}
       ELSE
         WRITE(Ave DIV 10);
       ClassTotal := ClassTotal + TotalScore;
-      WRITELN;
+      WRITELN
     END;
   WRITELN;
-  WRITELN ('Class average:');
+  WRITELN('Class average:');
   ClassTotal := ClassTotal DIV (ClassSize * NumberOfScores);
   WRITELN(ClassTotal DIV 10, '.', ClassTotal MOD 10:1)
 END.  {AverageScore}
