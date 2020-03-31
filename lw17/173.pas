@@ -4,8 +4,6 @@ VAR
   Overflow: BOOLEAN;
 
 PROCEDURE ReadNumber(VAR InF: TEXT; VAR N: INTEGER);
-PROGRAM Stat(INPUT, OUTPUT);
-
 VAR
   Ch: CHAR;
   EmptyDigit: INTEGER;
