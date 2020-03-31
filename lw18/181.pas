@@ -30,7 +30,9 @@ BEGIN {AverageScore}
           DO
             BEGIN
               WRITELN('Не верный балл! Введите балл от 0 до 100');
-              READ(NextScore)
+              IF NOT EOLN
+              THEN
+                READ(NextScore);
             END;
           TotalScore := TotalScore + NextScore;
           WhichScore := WhichScore + 1;
