@@ -2,6 +2,8 @@ PROGRAM AverageScore(INPUT, OUTPUT);
 CONST
   NumberOfScores = 4;
   ClassSize = 4;
+  ScoreMin = 0;
+  ScoreMax = 100;
 TYPE
   Score = 0 .. 100;
 VAR
@@ -18,11 +20,13 @@ BEGIN {AverageScore}
     BEGIN
       TotalScore := 0;
       WhichScore := 1;
-      WHILE WhichScore <= 4
+      WHILE WhichScore <= NumberOfScores
       DO
         BEGIN
-          READ(NextScore);
-          WHILE (NextScore > 100) OR (NextScore < 0)
+          IF NOT EOLN
+          THEN
+            READ(NextScore);
+          WHILE (NextScore > ScoreMax) OR (NextScore < ScoreMin)
           DO
             BEGIN
               WRITELN('Не верный балл! Введите балл от 0 до 100');
