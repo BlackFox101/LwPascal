@@ -19,7 +19,7 @@ VAR
   Ch: CHAR;
 BEGIN{CopyName}
   Ch := 'A';
-  WHILE (Ch IN Letter)
+  WHILE (Ch IN Letter) AND (NOT EOLN)
   DO
     BEGIN
       READ(FIn, Ch);

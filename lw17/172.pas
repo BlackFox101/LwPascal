@@ -23,36 +23,37 @@ BEGIN{ReadDigit}
   IF (Ch = '9') THEN Digit := 9
 END;{ReadDigit}
 
-PROCEDURE ReadNumber(VAR InF: TEXT; VAR N: INTEGER);
+PROCEDURE ReadNumber(VAR InF: TEXT; VAR Number: INTEGER);
 {Преобразует строку цифр из файла до первого нецифрового символа, 
- в соответствующее целое число N}
+ в соответствующее целое число Number}
 CONST
   MAXINT = 32767;
 VAR
   Ch: CHAR;
-  EmptyDigit: INTEGER; 
+  TempDigit: INTEGER; 
 BEGIN{ReadNumber}
-  N := 0; // Обнуляем N
-  WHILE (NOT EOLN) AND (EmptyDigit <> -1) AND (N <> -1)
+  Number := 0; // Обнуляем Number
+  WHILE (NOT EOLN) AND (TempDigit <> -1) AND (Number <> -1)
   DO
     BEGIN
-      ReadDigit(InF, EmptyDigit);
+      ReadDigit(InF, TempDigit);
       // Если встретилось чисто то считаем
-      IF EmptyDigit <> -1 
+      IF TempDigit <> -1 
       THEN
-        IF (N < MAXINT DIV 10)
+        IF (Number < MAXINT DIV 10)
         THEN
-          N := (N * 10) + EmptyDigit
+          Number := (Number * 10) + TempDigit
         ELSE
-          IF (EmptyDigit <= MAXINT MOD 10) AND (N = MAXINT DIV 10)
+          IF (TempDigit <= MAXINT MOD 10) AND (Number = MAXINT DIV 10)
           THEN
-            N := (N * 10) + EmptyDigit
+            Number := (Number * 10) + TempDigit
           ELSE
-            N := -1
+            Number := -1
     END; 
 END;{ReadNumber}
 
 BEGIN{ProgramReadNumber }
+  I := 0;
   ReadNumber(INPUT, I);
   WRITELN(I)
 END.{ProgramReadNumber}

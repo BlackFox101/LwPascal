@@ -1,9 +1,5 @@
 PROGRAM TestRemove(INPUT, OUTPUT);
-<<<<<<< HEAD
-{×èòàåò ñòðîêó èç âõîäà, ïðîïóñêàåò åå ÷åðåç RemoveExtraBlanks}
-=======
 {Ð§Ð¸Ñ‚Ð°ÐµÑ‚ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ð¸Ð· Ð²Ñ…Ð¾Ð´Ð°, Ð¿Ñ€Ð¾Ð¿ÑƒÑÐºÐ°ÐµÑ‚ ÐµÐµ Ñ‡ÐµÑ€ÐµÐ· RemoveExtraBlanks}
->>>>>>> 5d17a72612cba064281908573dcc2e61655938de
 USES Queue;
 VAR
   Ch: CHAR;

@@ -1,6 +1,6 @@
 PROGRAM ProgramReadDigit(INPUT, OUTPUT);
 VAR
-  EmptyDigit, Sum: INTEGER;
+  TempDigit, Sum: INTEGER;
   
 PROCEDURE ReadDigit(VAR InF: TEXT; VAR Digit: INTEGER);
 {Считывает текущий символ из файла, если он - цифра, возвращает его 
@@ -25,14 +25,14 @@ END;{ReadDigit}
 
 BEGIN{ProgramReadDigit}
   Sum := 0;
-  EmptyDigit := 0;
-  WHILE (NOT EOLN) AND (EmptyDigit <> -1)
+  TempDigit := 0;
+  WHILE (NOT EOLN) AND (TempDigit <> -1)
   DO
     BEGIN
-      ReadDigit(INPUT, EmptyDigit);
-      IF EmptyDigit <> -1
+      ReadDigit(INPUT, TempDigit);
+      IF TempDigit <> -1
       THEN
-        Sum := Sum + EmptyDigit
+        Sum := Sum + TempDigit
     END;
   WRITELN('Сумма:', Sum)
 END.{ProgramReadDigit}
