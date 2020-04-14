@@ -69,7 +69,7 @@ BEGIN{SortDate}
           END;
         END;
     END;
-  { опируем DateFile в OUTPUT}
+  {Копируем DateFile в OUTPUT}
   RESET(DateFile);
   CopyOut(DateFile)
 END.{SortDate}
