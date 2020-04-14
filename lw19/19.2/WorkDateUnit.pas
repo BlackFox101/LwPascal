@@ -42,7 +42,7 @@ BEGIN {CopyOut}
     BEGIN
       READ(DateFile, VarDate);
       WriteDate(OUTPUT, VarDate);
-      WRITELN;
+      WRITELN
     END
 END;{CopyOut}
 

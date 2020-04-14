@@ -1,7 +1,5 @@
 PROGRAM SortDate(INPUT, OUTPUT);
-
 USES WorkDateUnit;
-
 VAR
   Copying: BOOLEAN;
   D, VarDate: Date;
@@ -66,10 +64,10 @@ BEGIN{SortDate}
                 READ(TFile, VarDate);
                 WRITE(DateFile, VarDate)
               END
-          END;
-        END;
+          END
+        END
     END;
-  { опируем DateFile в OUTPUT}
+  {Копируем DateFile в OUTPUT}
   RESET(DateFile);
   CopyOut(DateFile)
 END.{SortDate}
