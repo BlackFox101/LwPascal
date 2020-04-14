@@ -1,7 +1,5 @@
 PROGRAM SortDate(INPUT, OUTPUT);
-
 USES WorkDateUnit;
-
 VAR
   Copying: BOOLEAN;
   D, VarDate: Date;
