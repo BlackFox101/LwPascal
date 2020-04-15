@@ -11,7 +11,7 @@ TYPE
   FileOfDate = FILE OF Date;
 
   FUNCTION Less(VAR D1, D2: Date): BOOLEAN; // Сравнение дат
-  PROCEDURE CopyOut(VAR DateFile: FileOfDate); //Копирование
+  PROCEDURE CopyOut(VAR DateFile: FileOfDate); // Вывод дат
   PROCEDURE ReadDate(VAR FIn: TEXT; VAR Result: Date); // Чтение даты
   PROCEDURE WriteDate(VAR FOut: TEXT; VAR Result: Date); // Вывод даты 
   PROCEDURE ReadMonth(VAR FIn: TEXT; VAR Mo: Month); // Чтение месяцы
