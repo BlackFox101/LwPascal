@@ -18,12 +18,12 @@ BEGIN{Prime}
       DO
         BEGIN
           Sieve := Sieve - [TempDigit];
-          TempDigit := TempDigit + PrimeDigit;
+          TempDigit := TempDigit + PrimeDigit
         END;       
       WRITE(PrimeDigit, ' '); // Выводим простое число
       WHILE NOT(PrimeDigit IN Sieve) AND (PrimeDigit < Max)
       DO
-        PrimeDigit := PrimeDigit + 1;
+        PrimeDigit := PrimeDigit + 1
     END;
-  WRITELN;
+  WRITELN
 END.{Prime}
