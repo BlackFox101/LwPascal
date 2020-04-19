@@ -52,13 +52,3 @@ BEGIN
   Lexico(F1, F2, Result);
   WRITELN(Result)
 END.
-
-
-
-
-
-
-
-
-
-
