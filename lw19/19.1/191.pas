@@ -5,9 +5,11 @@ CONST
   Max = 100;
 VAR
   Sieve: SET OF 0..Max; // Исходно множество из которого будем выбирать простые чиса 
+  PrimeSet: SET OF 0..Max; // Множество простых чисел
   PrimeDigit, TempDigit: INTEGER;
 BEGIN{Prime}
   Sieve := [2..Max];
+  PrimeSet := [];
   PrimeDigit := 2; // Первое простое число
   WHILE Sieve <> [] 
   DO
