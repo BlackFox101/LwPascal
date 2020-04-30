@@ -37,10 +37,10 @@ BEGIN {Initialize}
             READ(FInChiper, ChiperLetter); //Прочитаем шифр буквы
           IF Letter IN ['A' .. 'Z']
           THEN
-            Code[Letter] := ChiperLetter;
+            Code[Letter] := ChiperLetter
         END;
-      READLN(FInChiper);
-    END;
+      READLN(FInChiper)
+    END
 END;  {Initialize}
 
 PROCEDURE Encode(VAR MsgStr: Str; LenStr: INTEGER);

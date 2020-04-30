@@ -38,12 +38,10 @@ BEGIN {Initialize}
             READ(FInChiper, ChiperLetter); //Прочитаем шифр буквы
           IF Letter IN ['A' .. 'Z']
           THEN
-            Code[ChiperLetter] := Letter;
-          //WRITELN(ChiperLetter, ' ', Code[ChiperLetter]);
+            Code[ChiperLetter] := Letter
         END;
-      READLN(FInChiper);
-    END;
-    //WRITELN('Code[', I,  ']=''', Code[I], '''');
+      READLN(FInChiper)
+    END
 END;  {Initialize}
 
 PROCEDURE Encode(VAR MsgStr: Str; LenStr: INTEGER);
@@ -79,11 +77,11 @@ BEGIN {Encryption}
       BEGIN
         READ(EncryptedMsg, Msg[LenStr]);
         WRITE(OUTPUT, Msg[LenStr]);
-        LenStr := LenStr + 1;
+        LenStr := LenStr + 1
       END;
       READLN;
       WRITELN;
       {распечатать кодированное сообщение}
       Encode(Msg, LenStr)
-    END;
+    END
 END.  {Encryption}

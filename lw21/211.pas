@@ -39,7 +39,7 @@ BEGIN {Initialize}
   Code['W'] := 'T';
   Code['X'] := 'C';
   Code['Y'] := 'B';
-  Code['Z'] := 'A';
+  Code['Z'] := 'A'
 END;  {Initialize}
 
 PROCEDURE Encode(VAR S: Str; LenStr: INTEGER);
@@ -74,7 +74,7 @@ BEGIN {Encryption}
         BEGIN
           READ(Msg[LenStr]);
           WRITE(Msg[LenStr]);
-          LenStr := LenStr + 1;
+          LenStr := LenStr + 1
         END;
       READLN;
       WRITELN;
