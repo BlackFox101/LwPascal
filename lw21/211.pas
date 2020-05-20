@@ -5,11 +5,11 @@ CONST
   MaxLen = 20;
 TYPE
   Str = ARRAY [1 .. MaxLen] OF 'A' .. 'Z';
-  Chiper = ARRAY ['A' .. 'Z'] OF CHAR;
+  Chiper = ARRAY [' ' .. 'Z'] OF CHAR;
 VAR
   Msg: Str;
   Code: Chiper;
-  LenStr: 1 .. MaxLen;
+  LenStr: 0 .. MaxLen;
 
 PROCEDURE Initialize(VAR Code: Chiper);
 {Присвоить Code шифр замены}
@@ -39,7 +39,8 @@ BEGIN {Initialize}
   Code['W'] := 'T';
   Code['X'] := 'C';
   Code['Y'] := 'B';
-  Code['Z'] := 'A'
+  Code['Z'] := 'A';
+  Code[' '] := '&';
 END;  {Initialize}
 
 PROCEDURE Encode(VAR S: Str; LenStr: INTEGER);
@@ -49,15 +50,11 @@ VAR
 BEGIN {Encode}
   FOR Index := 1 TO LenStr
   DO
-    IF S[Index] IN ['A' .. 'Z']
+    IF S[Index] IN [' ' .. 'Z']
     THEN
       WRITE(Code[S[Index]])
     ELSE
-      IF S[Index] = ' '
-      THEN
-        WRITE('_')
-      ELSE
-        WRITE(S[Index]);
+      WRITE(S[Index]);
   WRITELN
 END;  {Encode}
 
@@ -68,13 +65,13 @@ BEGIN {Encryption}
   DO
     BEGIN
       {читать строку в Msg и распечатать ее}
-      LenStr := 1;
-      WHILE NOT EOLN AND (LenStr < MaxLen + 1)
+      LenStr := 0;
+      WHILE NOT EOLN AND (LenStr < MaxLen)
       DO
         BEGIN
+          LenStr := LenStr + 1;
           READ(Msg[LenStr]);
-          WRITE(Msg[LenStr]);
-          LenStr := LenStr + 1
+          WRITE(Msg[LenStr])
         END;
       READLN;
       WRITELN;
