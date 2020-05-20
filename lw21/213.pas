@@ -3,14 +3,13 @@ PROGRAM Encryption(INPUT, OUTPUT);
   и печатает новые символы в OUTPUT}
 CONST
   MaxLen = 20;
-  EngLetters = 26;
 TYPE
   Str = ARRAY [1 .. MaxLen] OF CHAR;
-  Chiper = ARRAY ['!' .. 'Z'] OF CHAR;
+  Chiper = ARRAY [' ' .. 'Z'] OF CHAR;
 VAR
   Msg: Str;
   Code: Chiper;
-  LenStr: 1 .. MaxLen;
+  LenStr: 0 .. MaxLen;
   ChiperFile, EncryptedMsg: TEXT; // Формата "Буква-ШифрБуквы"
 
 PROCEDURE Initialize(VAR FInChiper: TEXT);
@@ -19,7 +18,7 @@ var
   Letter, ChiperLetter: CHAR;
   I: CHAR;
 BEGIN {Initialize}
-  FOR I := '!' TO 'Z'
+  FOR I := ' ' TO 'Z'
   DO
     Code[I] := I; // Сначал все буквы зашифруем как "сами себе"
   RESET(FInChiper);
@@ -36,7 +35,7 @@ BEGIN {Initialize}
           IF NOT EOLN(FInChiper)
           THEN
             READ(FInChiper, ChiperLetter); //Прочитаем шифр буквы
-          IF Letter IN ['A' .. 'Z']
+          IF Letter IN [' ' .. 'Z']
           THEN
             Code[ChiperLetter] := Letter
         END;
@@ -51,37 +50,35 @@ VAR
 BEGIN {Encode}
   FOR Index := 1 TO LenStr
   DO
-    IF MsgStr[Index] IN ['!' .. 'Z']
+    IF MsgStr[Index] IN [' ' .. 'Z']
     THEN
       WRITE(OUTPUT, Code[MsgStr[Index]])
     ELSE
-      IF MsgStr[Index] = ' '
-      THEN
-        WRITE(OUTPUT, '_')
-      ELSE
-        WRITE(OUTPUT, MsgStr[Index]);
+      WRITE(OUTPUT, MsgStr[Index]);
   WRITELN
 END;  {Encode}
 
 BEGIN {Encryption}
   ASSIGN(ChiperFile, 'ChiperFile.TXT');
+  ASSIGN(EncryptedMsg, 'EncryptedMsg.TXT');
   {Инициализировать Code}
   Initialize(ChiperFile);
+  RESET(EncryptedMsg);
   WHILE NOT EOF(EncryptedMsg)
   DO
     BEGIN
       {читать строку в Msg и распечатать ее}
-      LenStr := 1;
-      WHILE NOT EOLN(EncryptedMsg) AND (LenStr < MaxLen + 1)
+      LenStr := 0;
+      WHILE NOT EOLN(EncryptedMsg) AND (LenStr < MaxLen)
       DO
-      BEGIN
-        READ(EncryptedMsg, Msg[LenStr]);
-        WRITE(OUTPUT, Msg[LenStr]);
-        LenStr := LenStr + 1
-      END;
-      READLN;
+        BEGIN
+          LenStr := LenStr + 1;
+          READ(EncryptedMsg, Msg[LenStr]);
+          WRITE(OUTPUT, Msg[LenStr])
+        END;
+      READLN(EncryptedMsg);
       WRITELN;
-      {распечатать кодированное сообщение}
+      {распечатать раскодированное сообщение}
       Encode(Msg, LenStr)
     END
 END.  {Encryption}
