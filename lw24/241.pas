@@ -20,7 +20,7 @@ BEGIN {Insert}
       Ptr^.RLink := NIL
     END
   ELSE
-    IF Ptr^.Key > Data
+    IF Ptr^.Key >= Data
     THEN
       Insert(Ptr^.LLink, Data)
     ELSE
