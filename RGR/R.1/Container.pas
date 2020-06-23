@@ -1,0 +1,7 @@
+UNIT Container;
+INTERFACE
+
+IMPLEMENTATION
+
+BEGIN {UNIT Container}
+END. {UNIT Container}
