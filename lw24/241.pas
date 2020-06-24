@@ -13,12 +13,12 @@ PROCEDURE Insert(VAR Ptr: Tree; Data: CHAR);
 BEGIN {Insert}
   IF Ptr = NIL
   THEN
-  BEGIN {Создаем лист со значением Data}
-    NEW(Ptr);
-    Ptr^.Key := Data;
-    Ptr^.LLink := NIL;
-    Ptr^.RLink := NIL
-  END
+    BEGIN {Создаем лист со значением Data}
+      NEW(Ptr);
+      Ptr^.Key := Data;
+      Ptr^.LLink := NIL;
+      Ptr^.RLink := NIL
+    END
   ELSE
     IF Ptr^.Key >= Data
     THEN
@@ -31,21 +31,21 @@ PROCEDURE PrintTree(Ptr: Tree);
 BEGIN {PrintTree}
   IF Ptr <> NIL
   THEN  {Печатает поддерево слева, вершину, поддерево справа}
-  BEGIN
-    PrintTree(Ptr^.LLink);
-    WRITE(Ptr^.Key);
-    PrintTree(Ptr^.RLink)
-  END;
+    BEGIN
+      PrintTree(Ptr^.LLink);
+      WRITE(Ptr^.Key);
+      PrintTree(Ptr^.RLink)
+    END;
 END;  {PrintTree}
 
 BEGIN {TreeSort}
   Root := NIL;
   WHILE NOT EOLN
   DO
-  BEGIN
-    READ(Ch);
-    Insert(Root, Ch)
-  END;
+    BEGIN
+      READ(Ch);
+      Insert(Root, Ch)
+    END;
   PrintTree(Root);
   WRITELN
 END.  {TreeSort}

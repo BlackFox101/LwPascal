@@ -1,19 +1,14 @@
 PROGRAM CountWords(INPUT, OUTPUT);
 USES
-  Word, Container;
+  WordModule;
 VAR
   TextFile, FileStats: TEXT;
 
 PROCEDURE GetStatistics(VAR FIn, Fout: TEXT);
-TYPE
-  Words = RECORD
-            Word: WordType;
-            Quantity: INTEGER
-          END;
 VAR
- Word: ;
+  CurrentWord: WordType;
 BEGIN {GetStatistics}
-  {IF NOT EOF(FIn)
+  IF NOT EOF(FIn)
   THEN
     BEGIN
       WHILE NOT EOF(FIn)
@@ -22,15 +17,21 @@ BEGIN {GetStatistics}
           WHILE NOT EOLN(FIn)
           DO
             BEGIN
-              GetWord(FIn, Words.Word);// РџРѕР»СѓС‡РёС‚СЊ СЃР»РѕРІРѕ
-              //Р”РѕР±Р°РІРёС‚СЊ СЃР»РѕРІРѕ РІ РєРѕРЅС‚РµР№РЅРµСЂ
+              GetWord(FIn, CurrentWord); //Получить слово
+              WRITELN(Fout, CurrentWord);
+              {Добавить слово в контейнер}
+              IF (CurrentWord))
+              THEN
+                //IncrementWordQuantity
+              ELSE
+                //AddWordInTree
             END;
           READLN(FIn);
         END;
+      {Вывести статистику}
     END
   ELSE
-    WRITELN(Fout);}
-  GetWord(FIn, Words.Word);// РџРѕР»СѓС‡РёС‚СЊ СЃР»РѕРІРѕ
+    WRITELN(Fout);
 END; {GetStatistics}
 
 BEGIN {CountWords}
