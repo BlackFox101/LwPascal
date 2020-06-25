@@ -44,30 +44,28 @@ IMPLEMENTATION
       MinLengthWord := Length(FirstWord)
     ELSE
       MinLengthWord := Length(SecondWord);
-    FOR I := 1 TO MinLengthWord + 1
+    FOR I := 1 TO MinLengthWord
     DO
       BEGIN
         IF FirstWord[I] > SecondWord[I]
         THEN
           BEGIN
             CompareWords := TRUE;
-            Temp := 1;
             Exit
           END;
         IF FirstWord[I] < SecondWord[I]
         THEN
           BEGIN
             CompareWords := FALSE;
-            Temp := 0;
             Exit
-          END
-      END;
-    IF (Temp IN [1, 0]) AND  (Length(FirstWord) < Length(SecondWord))
-    THEN
-      CompareWords := FALSE;
-    IF (Temp IN [1, 0]) AND  (Length(FirstWord) > Length(SecondWord))
-    THEN
-      CompareWords := TRUE
+          END;
+        IF (FirstWord[I] = SecondWord[I]) AND (I = MinLengthWord) AND (Length(FirstWord) < Length(SecondWord))
+        THEN
+          CompareWords := FALSE;
+        IF (FirstWord[I] = SecondWord[I]) AND (I = MinLengthWord) AND (Length(FirstWord) > Length(SecondWord))
+        THEN
+          CompareWords := TRUE
+      END
   END;
 
   FUNCTION IsExistWordInTree(VAR Tree: TreeType; Word: WordType): BOOLEAN;
