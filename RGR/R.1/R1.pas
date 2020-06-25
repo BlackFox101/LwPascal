@@ -1,16 +1,18 @@
 PROGRAM CountWords(INPUT, OUTPUT);
 USES
-  WordModule;
+  WordModule, SortModule, StatsModule;
 VAR
   TextFile, FileStats: TEXT;
 
-PROCEDURE GetStatistics(VAR FIn, Fout: TEXT);
+PROCEDURE GetStatistics(VAR FIn, FOut: TEXT);
 VAR
   CurrentWord: WordType;
+  RootTreeSort: TreeType;
 BEGIN {GetStatistics}
   IF NOT EOF(FIn)
   THEN
     BEGIN
+      RootTreeSort := NIL;
       WHILE NOT EOF(FIn)
       DO
         BEGIN
@@ -18,20 +20,18 @@ BEGIN {GetStatistics}
           DO
             BEGIN
               GetWord(FIn, CurrentWord); //Получить слово
-              WRITELN(Fout, CurrentWord);
-              {Добавить слово в контейнер}
-              IF (CurrentWord))
+              IF IsExistWordInTree(RootTreeSort, CurrentWord)
               THEN
-                //IncrementWordQuantity
+                IncrementWordQuantity(RootTreeSort, CurrentWord)
               ELSE
-                //AddWordInTree
+                AddWordInTree(RootTreeSort, CurrentWord)
             END;
-          READLN(FIn);
+          READLN(FIn)
         END;
-      {Вывести статистику}
+      PrintTreeStats(FOut, RootTreeSort)
     END
   ELSE
-    WRITELN(Fout);
+    WRITELN(Fout)
 END; {GetStatistics}
 
 BEGIN {CountWords}
