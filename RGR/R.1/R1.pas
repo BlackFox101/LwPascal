@@ -20,11 +20,13 @@ BEGIN {GetStatistics}
           DO
             BEGIN
               GetWord(FIn, CurrentWord); //Получить слово
-              IF IsExistWordInTree(RootTreeSort, CurrentWord)
+              IF CurrentWord <> ''
               THEN
-                IncrementWordQuantity(RootTreeSort, CurrentWord)
-              ELSE
-                AddWordInTree(RootTreeSort, CurrentWord)
+                IF IsExistWordInTree(RootTreeSort, CurrentWord)
+                THEN
+                  IncrementWordQuantity(RootTreeSort, CurrentWord)
+                ELSE
+                  AddWordInTree(RootTreeSort, CurrentWord)
             END;
           READLN(FIn)
         END;
@@ -39,5 +41,5 @@ BEGIN {CountWords}
   ASSIGN(FileStats, 'FileStats.TXT');
   RESET(TextFile);
   REWRITE(FileStats);
-  GetStatistics(TextFile, OUTPUT)
+  GetStatistics(TextFile, FileStats)
 END. {CountWords}

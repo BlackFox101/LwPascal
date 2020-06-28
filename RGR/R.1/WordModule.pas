@@ -14,20 +14,17 @@ IMPLEMENTATION
   { Процедура пропустит не нужные символы и получит слово}
   VAR
     Letter: CHAR;
-    Rus, Eng: BOOLEAN;
   BEGIN {GetWord}
     Word := '';
-    {Rus := FALSE;
-    Eng := FALSE;}
-    WHILE NOT EOF(FIn) AND NOT((Letter IN RusAlphabet) OR (Letter IN EngAlphabet))
-    DO
+    IF NOT EOF(FIn)
+    THEN
       BEGIN
         READ(FIn, Letter);
         IF (Letter IN RusAlphabet) OR (Letter IN EngAlphabet)
         THEN
           Word := Word + GetLowerCase(Letter)
       END;
-    WHILE NOT EOF(FIn) AND ((Letter IN RusAlphabet) OR (Letter IN EngAlphabet))
+    WHILE (NOT EOLN(FIn)) AND (NOT EOF(FIn)) AND ((Letter IN RusAlphabet) OR (Letter IN EngAlphabet))
     DO
       BEGIN
         READ(FIn, Letter);
