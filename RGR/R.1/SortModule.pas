@@ -11,8 +11,7 @@ TYPE
               END;
 
   PROCEDURE AddWordInTree(VAR Tree: TreeType; WordString: WordType); //Добавление слово в дерево
-  FUNCTION CompareWords(FirstWord, SecondWord: WordType): BOOLEAN; //Сравнение двух строк
-  FUNCTION IsExistWordInTree(VAR Tree: TreeType; Word: WordType): BOOLEAN; //Проверка есть ли слово в дереве
+  PROCEDURE PrintTreeStats(VAR FOut: TEXT; Tree: TreeType); //Вывод статистики
 IMPLEMENTATION
   PROCEDURE AddWordInTree(VAR Tree: TreeType; WordString: WordType);
   BEGIN {AddWordInTree}
@@ -26,55 +25,27 @@ IMPLEMENTATION
         Tree^.RLink := NIL
       END
     ELSE
-      IF CompareWords(Tree^.Word, WordString){Tree^.Word >= WordString}
+      IF Tree^.Word = WordString
       THEN
-        AddWordInTree(Tree^.LLink, WordString)
+        Tree^.Quantity := Tree^.Quantity + 1
       ELSE
-        AddWordInTree(Tree^.RLink, WordString)
-  END; {Insert}
+        IF Tree^.Word >= WordString
+        THEN
+          AddWordInTree(Tree^.LLink, WordString)
+        ELSE
+          AddWordInTree(Tree^.RLink, WordString)
+  END; {AddWordInTree}
 
-  FUNCTION CompareWords(FirstWord, SecondWord: WordType): BOOLEAN;
-  VAR
-    I, MinLengthWord, Temp: INTEGER;
-  BEGIN
-    Temp := 2;
-    CompareWords := FALSE;
-    IF Length(FirstWord) < Length(SecondWord)
-    THEN
-      MinLengthWord := Length(FirstWord)
-    ELSE
-      MinLengthWord := Length(SecondWord);
-    FOR I := 1 TO MinLengthWord
-    DO
-      BEGIN
-        IF FirstWord[I] > SecondWord[I]
-        THEN
-          BEGIN
-            CompareWords := TRUE;
-            Exit
-          END;
-        IF FirstWord[I] < SecondWord[I]
-        THEN
-          BEGIN
-            CompareWords := FALSE;
-            Exit
-          END;
-        IF (FirstWord[I] = SecondWord[I]) AND (I = MinLengthWord) AND (Length(FirstWord) < Length(SecondWord))
-        THEN
-          CompareWords := FALSE;
-        IF (FirstWord[I] = SecondWord[I]) AND (I = MinLengthWord) AND (Length(FirstWord) > Length(SecondWord))
-        THEN
-          CompareWords := TRUE
-      END
-  END;
-
-  FUNCTION IsExistWordInTree(VAR Tree: TreeType; Word: WordType): BOOLEAN;
-  BEGIN
-    IsExistWordInTree := FALSE;
+  PROCEDURE PrintTreeStats(VAR FOut: TEXT; Tree: TreeType);
+  BEGIN {PrintTreeStats}
     IF Tree <> NIL
-    THEN
-      IsExistWordInTree := (Tree^.Word = Word) OR IsExistWordInTree(Tree^.LLink, Word) OR IsExistWordInTree(Tree^.RLink, Word)
-  END;
+    THEN  {Печатает поддерево слева, вершину, поддерево справа}
+    BEGIN
+      PrintTreeStats(FOut, Tree^.LLink);
+      WRITELN(FOut, Tree^.Word, ' ', Tree^.Quantity);
+      PrintTreeStats(FOut, Tree^.RLink)
+    END
+  END; {PrintTreeStats}
 
 BEGIN {UNIT SortModule}
 END. {UNIT SortModule}

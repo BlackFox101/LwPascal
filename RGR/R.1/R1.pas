@@ -1,6 +1,6 @@
 PROGRAM CountWords(INPUT, OUTPUT);
 USES
-  WordModule, SortModule, StatsModule;
+  WordModule, SortModule;
 VAR
   TextFile, FileStats: TEXT;
 
@@ -22,11 +22,7 @@ BEGIN {GetStatistics}
               GetWord(FIn, CurrentWord); //Получить слово
               IF CurrentWord <> ''
               THEN
-                IF IsExistWordInTree(RootTreeSort, CurrentWord)
-                THEN
-                  IncrementWordQuantity(RootTreeSort, CurrentWord)
-                ELSE
-                  AddWordInTree(RootTreeSort, CurrentWord)
+                AddWordInTree(RootTreeSort, CurrentWord)
             END;
           READLN(FIn)
         END;
