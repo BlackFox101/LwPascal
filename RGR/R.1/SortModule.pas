@@ -43,7 +43,8 @@ IMPLEMENTATION
     BEGIN
       PrintTreeStats(FOut, Tree^.LLink);
       WRITELN(FOut, Tree^.Word, ' ', Tree^.Quantity);
-      PrintTreeStats(FOut, Tree^.RLink)
+      PrintTreeStats(FOut, Tree^.RLink);
+      Dispose(Tree);
     END
   END; {PrintTreeStats}
 
