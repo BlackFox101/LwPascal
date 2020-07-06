@@ -41,7 +41,7 @@ BEGIN {InsertionSort}
           Found := FALSE;
           WHILE (Curr <> 0) AND NOT Found
           DO
-            IF Arr[Index]. Key > Arr[Curr].Key
+            IF Arr[Index].Key > Arr[Curr].Key
             THEN
               BEGIN
                 Prev := Curr;
@@ -54,8 +54,8 @@ BEGIN {InsertionSort}
           THEN
             First := Index
           ELSE
-            Arr[Prev].Next := Index;
-      END;
+            Arr[Prev].Next := Index
+      END
     END; {WHILE}
   {Печать списка начиная с Arr[First]}
   Index := First;

@@ -2,9 +2,9 @@ PROGRAM TreeSort(INPUT, OUTPUT);
 TYPE
   Tree = ^NodeType;
   NodeType = RECORD
-    Key: CHAR;
-    LLink, RLink: Tree
-  END;
+               Key: CHAR;
+               LLink, RLink: Tree
+             END;
 VAR
   Root: Tree;
   Ch: CHAR;

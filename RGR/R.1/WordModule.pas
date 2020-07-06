@@ -3,6 +3,7 @@ INTERFACE
 CONST
   RusAlphabet = ['А' .. 'Я', 'Ё', 'а' .. 'я', 'ё'];
   EngAlphabet = ['A' .. 'Z', 'a' .. 'z'];
+  UpperCase = ['А' .. 'Я', 'Ё', 'A' .. 'Z'];
   MaxLenghtWord = 50;
 TYPE
   WordType = STRING[MaxLenghtWord];
@@ -38,8 +39,6 @@ IMPLEMENTATION
   { Если передана буква в верхнем регистре переделает ее в нижний,
     если 'Ё' и 'ё' => 'е',
     если передана не буква то просто вернет ее}
-  CONST
-    UpperCase = ['А' .. 'Я', 'Ё', 'A' .. 'Z'];
   BEGIN {GetLowerCase}
     IF (Letter IN RusAlphabet) OR (Letter IN EngAlphabet)
     THEN
@@ -54,5 +53,5 @@ IMPLEMENTATION
       GetLowerCase := Letter
   END; {GetLowerCase}
 
-BEGIN {UNIT Word}
-END. {UNIT Word}
+BEGIN {UNIT WordModule}
+END. {UNIT WordModule}
