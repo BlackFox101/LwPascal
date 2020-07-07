@@ -39,7 +39,7 @@ IMPLEMENTATION
     если 'Ё' и 'ё' => 'е',
     если передана не буква то просто вернет ее}
   BEGIN {GetLowerCase}
-    IF (Letter IN RusAlphabet) OR (Letter IN EngAlphabet)
+    IF Letter IN RusAndEngAlphabet
     THEN
       IF (Letter = 'Ё') OR (Letter ='ё')
       THEN
