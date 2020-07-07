@@ -1,8 +1,7 @@
 UNIT WordModule;
 INTERFACE
 CONST
-  RusAlphabet = ['À' .. 'ß', '¨', 'à' .. 'ÿ', '¸'];
-  EngAlphabet = ['A' .. 'Z', 'a' .. 'z'];
+  RusAndEngAlphabet = ['À' .. 'ß', '¨', 'à' .. 'ÿ', '¸', 'A' .. 'Z', 'a' .. 'z'];
   UpperCase = ['À' .. 'ß', '¨', 'A' .. 'Z'];
   MaxLenghtWord = 50;
 TYPE
