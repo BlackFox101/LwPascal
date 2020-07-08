@@ -20,15 +20,15 @@ IMPLEMENTATION
     THEN
       BEGIN
         READ(FIn, Letter);
-        IF (Letter IN RusAlphabet) OR (Letter IN EngAlphabet)
+        IF Letter IN RusAndEngAlphabet
         THEN
           Word := Word + GetLowerCase(Letter)
       END;
-    WHILE (NOT EOLN(FIn)) AND (NOT EOF(FIn)) AND ((Letter IN RusAlphabet) OR (Letter IN EngAlphabet))
+    WHILE (NOT EOLN(FIn)) AND (NOT EOF(FIn)) AND (Letter IN RusAndEngAlphabet)
     DO
       BEGIN
         READ(FIn, Letter);
-        IF (Letter IN RusAlphabet) OR (Letter IN EngAlphabet)
+        IF Letter IN RusAndEngAlphabet
         THEN
           Word := Word + GetLowerCase(Letter)
       END
