@@ -51,7 +51,7 @@ IMPLEMENTATION
   PROCEDURE CleanTree(Tree: TreeType);
   BEGIN {CleanTree}
     IF Tree <> NIL
-    THEN  {Печатает поддерево слева, вершину, поддерево справа}
+    THEN  {Чистит дерево слева, вершину, поддерево справа}
       BEGIN
         CleanTree(Tree^.LLink);
         CleanTree(Tree^.RLink);
