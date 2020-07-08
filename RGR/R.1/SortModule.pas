@@ -55,8 +55,7 @@ IMPLEMENTATION
       BEGIN
         CleanTree(Tree^.LLink);
         CleanTree(Tree^.RLink);
-        Dispose(Tree);
-        Tree := NIL
+        Dispose(Tree)
       END
   END; {CleanTree}
 

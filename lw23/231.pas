@@ -1,4 +1,4 @@
-PROGRAM InsertSort2 (INPUT, OUTPUT);
+PROGRAM InsertSort2(INPUT, OUTPUT);
 TYPE
   NodePtr = ^Node;
   Node = RECORD
