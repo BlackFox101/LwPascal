@@ -27,7 +27,7 @@ BEGIN {GetStatistics}
           READLN(FIn)
         END;
       PrintTreeStats(FOut, RootTreeSort);
-      CleanTree(RootTreeSort);
+      CleanTree(RootTreeSort)
     END
   ELSE
     WRITELN(Fout)
