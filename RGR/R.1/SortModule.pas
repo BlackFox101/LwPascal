@@ -12,6 +12,7 @@ TYPE
 
   PROCEDURE AddWordInTree(VAR Tree: TreeType; WordString: WordType); //Добавление слово в дерево
   PROCEDURE PrintTreeStats(VAR FOut: TEXT; Tree: TreeType); //Вывод статистики
+  PROCEDURE CleanTree(Tree: TreeType); //Очистка дерева
 IMPLEMENTATION
   PROCEDURE AddWordInTree(VAR Tree: TreeType; WordString: WordType);
   BEGIN {AddWordInTree}
@@ -40,13 +41,23 @@ IMPLEMENTATION
   BEGIN {PrintTreeStats}
     IF Tree <> NIL
     THEN  {Печатает поддерево слева, вершину, поддерево справа}
-    BEGIN
-      PrintTreeStats(FOut, Tree^.LLink);
-      WRITELN(FOut, Tree^.Word, ' ', Tree^.Quantity);
-      PrintTreeStats(FOut, Tree^.RLink);
-      Dispose(Tree)
-    END
+      BEGIN
+        PrintTreeStats(FOut, Tree^.LLink);
+        WRITELN(FOut, Tree^.Word, ' ', Tree^.Quantity);
+        PrintTreeStats(FOut, Tree^.RLink)
+      END
   END; {PrintTreeStats}
+
+  PROCEDURE CleanTree(Tree: TreeType);
+  BEGIN {CleanTree}
+    IF Tree <> NIL
+    THEN  {Печатает поддерево слева, вершину, поддерево справа}
+      BEGIN
+        CleanTree(Tree^.LLink);
+        CleanTree(Tree^.RLink);
+        Dispose(Tree)
+      END
+  END; {CleanTree}
 
 BEGIN {UNIT SortModule}
 END. {UNIT SortModule}
